@@ -1,0 +1,123 @@
+
+<% include layout %>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/images/home-me.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <% if( typeof title!== 'undefined'){ %>
+                            <h1><%= title%></h1>
+                        <% }%>
+                        <hr class="small">
+                        <span class="subheading">A place to read!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div>
+        <% if (success_msg.length > 0){ %>
+
+            <div class="alert alert-success"><%= success_msg %></div>
+
+            <% } %>
+
+            <% if (error_msg.length > 0){ %>
+
+            <div class="alert alert-danger"><%= error_msg %></div>
+
+        <% } %>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        
+                <% if( typeof posts!== 'undefined' && posts.length > 0  ) {
+                    posts.forEach(function(post){ %>
+                    <div class="post-preview">
+                     <a href="/posts/show/<%= post._id %>">
+                        <h2 class="post-title"> 
+                            <%= post.title %>
+                        </h2>    
+                        <h3 class="post-subtitle">
+                            <%= post.subtitle %> 
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by <%= post.author %> in <a href="/posts/category/<%= post.category %>"><%= post.category %></a> on <%= moment(post.date).format('LLL') %> </p> 
+                    </div>
+                    <hr>
+                <% })}%>    
+                    
+                
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="next">
+                        <a href="#">Older Posts &rarr;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/people/Yagnesh-Yerninti/100001744308244">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/yagnesh-y">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Blog 2017</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="/javascripts/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/javascripts/bootstrap.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="/javascripts/jqBootstrapValidation.js"></script>
+    <script src="/javascripts/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="/javascripts/clean-blog.min.js"></script>
+    <script>
+        var allposts = '<%= posts.length %>';  
+        console.log(allposts);         
+    </script> 
+ </body>
+</html>
+

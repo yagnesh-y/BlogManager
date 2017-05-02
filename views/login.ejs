@@ -1,0 +1,25 @@
+<% include layout %>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <div class="flashmessages">
+      <% if (success_msg.length > 0){ %>
+      <div class="alert alert-success"><%= success_msg %></div>
+      <% } %>
+      <% if (error_msg.length > 0){ %>
+      <div class="alert alert-danger"><%= error_msg %></div>
+      <% } %>
+    </div>
+        <div class = "container">
+            <div class="wrapper">
+                <form action="/users/login" method="POST" name="Login_Form" class="form-signin">       
+                    <h3 class="form-signin-heading">Welcome Back Admin! Please Sign In</h3>
+                    <hr class="colorgraph"><br>
+                    
+                    <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" />
+                    <input type="password" class="form-control" name="password" placeholder="Password" required=""/>     		  
+                    
+                    <button type="submit" class="btn btn-primary btn-block" value="login">Login</button>
+                </form>			
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,170 @@
+<% include layout %>
+   <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+    <header class="intro-header" id="add-posts-img" style="background-image: url('/images/addposts-me1.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Make an awesome Post!</h1>
+                        <hr class="small">
+                        <span class="subheading">Go Ahead!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+     <!-- Main Content -->
+    <div class="container">
+          <% if (success_msg.length > 0){ %>
+
+            <div class="alert alert-success"><%= success_msg %></div>
+
+            <% } %>
+
+            <% if (error_msg.length > 0){ %>
+
+            <div class="alert alert-danger"><%= error_msg %></div>
+
+            <% } %>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>Write something beautiful!</p>
+                <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+                <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+                <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+                <form name="sentMessage" id="contactForm" method="POST" action ="/addposts/add" enctype="multipart/form-data">
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Title</label>
+                            <input type="text" class="form-control" placeholder="Title" name = "title" required data-validation-required-message="Please enter title for your post.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Sub-Title</label>
+                            <input type="text" class="form-control" placeholder="Sub-Title" name="subtitle" required data-validation-required-message="Please enter sub-heading/sub-title for your post.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group" style="padding: 10px; margin-top: 10px">
+                            Select Category
+                            <select class="selectpicker" id="category" data-width="75%" data-live-search="true" title="Choose one of the following..." name="category">
+                                <!--<input type="text" list="categories" name="category" />
+                                <datalist id="categories">-->
+                                 <% if( typeof categories!== 'undefined' && categories.length >0 ) { categories.forEach(function(i){ %>
+                                    <option><%= i.category %></option>
+                                 <% }); } %>
+                                 <!--</datalist>-->
+                            </select>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label> new-category </label>
+                            <input type="text" id="new-category" class="form-control" placeholder="Category not found? Add new category :)" name="newcategory">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Content</label>
+                            <textarea rows="5" class="form-control" placeholder="Content" name="content" required data-validation-required-message="Please enter content for your post."></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Author</label>
+                            <input type="text" class="form-control" placeholder="Author" name="author" required data-validation-required-message="Please enter author name for your post.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                     <div class="row control-group">
+                        <div class="col-sm-9" style="padding: 10px; margin-top: 10px">
+                            <input type="file" id="profileImage" name="profileimg">
+                        </div>
+                    </div>
+                    <br>
+                    <div id="success"></div>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <button type="submit" class="btn btn-default">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+       <!-- jQuery -->
+    <script src="/javascripts/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/javascripts/bootstrap.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="/javascripts/clean-blog.min.js"></script>
+    <script>
+        $(document).ready(function(){
+           var newcategory= $('#new-category').focusin(function(){
+                $('#category').val('');
+           });
+           var date= new Date();
+           $('#contactForm').on('submit', function(){
+               $('#contactForm').attr('action', '/addposts/add/' + date);
+           })
+          //var category = $('#category').val();
+           //$('#category').append(`<option> ${category} </option>`)
+         
+            if( typeof '<% posts %>'!== 'undefined' ) {
+              console.log('Hola');
+            }   
+        });
+    </script>
+     <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/people/Yagnesh-Yerninti/100001744308244">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/yagnesh-y">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Blog 2017</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+            CKEDITOR.replace( 'content' );
+    </script>
+ </body>
+</html>
+     
+
+    
